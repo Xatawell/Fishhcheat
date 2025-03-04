@@ -53,8 +53,8 @@ FOVCircle.Color = Color3.new(255,255,255)
 FOVCircle.Thickness = 1
 FOVCircle.Filled = false
 
---RepStorage.VIPSettings.NoTeamLimits.Value = true
---RepStorage.VIPSettings.EnabledSpectator.Value = true
+RepStorage.VIPSettings.NoTeamLimits.Value = true
+RepStorage.VIPSettings.EnabledSpectator.Value = true
 RepStorage.VIPSettings.NoVoiceCooldown.Value = true
 
 if not Lighting:FindFirstChild('ColorCorrection') then
@@ -267,7 +267,7 @@ Library.ShowCustomCursor = true -- Toggles the Linoria cursor globaly (Default v
 Library.NotifySide = "Left" -- Changes the side of the notifications globaly (Left, Right) (Default value = Left)
 
 local Window = Library:CreateWindow({
-	Title = 'FishhCheat v2',
+	Title = 'SkibidiCheat v4',
 	Center = true,
 	AutoShow = true,
 	Resizable = true,
@@ -392,12 +392,11 @@ GB_WeaponMods:AddToggle('NoSpread', { Text = 'Reduced Spread', Default = false, 
 --GB_WeaponMods:AddToggle('InfDamage', { Text = 'Infinite Damage', Default = false, Tooltip = 'All weapons insta-kill'})
 GB_WeaponMods:AddToggle('InfAmmo', { Text = 'Infinite Ammo', Default = false, Tooltip = 'Infinite ammo on all weapons'})
 GB_WeaponMods:AddToggle('InfCloak', { Text = 'Infinite Cloak', Default = false, Tooltip = 'Infinite cloak for Agent'})
---GB_WeaponMods:AddToggle('InfCharge', { Text = 'Infinite Shield Charge', Default = false, Tooltip = 'Infinite charge for Annihilator shields'}) -- Possibly detected
+GB_WeaponMods:AddToggle('InfCharge', { Text = 'Infinite Shield Charge', Default = false, Tooltip = 'Infinite charge for Annihilator shields'}) -- Possibly detected
 GB_WeaponMods:AddToggle('MaxBuildings', { Text = 'Instant LVL 3 Buildings', Default = false, Tooltip = "Mechanic buildings will instantly be lvl 3 once deployed"})
---[[GB_WeaponMods:AddToggle('FirerateChanger', { Text = 'Firerate Modifier', Default = false, Tooltip = 'Modify the firerate of most weapons'})
+GB_WeaponMods:AddToggle('FirerateChanger', { Text = 'Firerate Modifier', Default = false, Tooltip = 'Modify the firerate of most weapons'})
 GB_WeaponMods:AddSlider('FirerateAmount', {Text = 'Firerate', Default = 0.2, Min = 0.1, Max = 1, Rounding = 2, Compact = true})
 -- fakeaxis fight me irl
-]]
 
 Toggles.AlwaysBackstab:OnChanged(function() -- Always Backstab
 	if Toggles.AlwaysBackstab.Value then
@@ -446,7 +445,7 @@ LegacyLocalVariables.cloakleft:GetPropertyChangedSignal('Value'):Connect(functio
         LegacyLocalVariables.cloakleft.Value = 10
     end
 end)
---[[
+
 LegacyLocalVariables.chargeleft:GetPropertyChangedSignal('Value'):Connect(function()
     if Toggles.InfCharge.Value then
 		if LegacyLocalVariables.Held2.Value then
@@ -462,7 +461,6 @@ LegacyLocalVariables.Held2:GetPropertyChangedSignal("Value"):Connect(function() 
 		LegacyLocalVariables.chargeleft.Value = 100
 	end
 end)
-]]
 
 local GB_Auto = Tabs.Automation:AddLeftGroupbox('Automation') 
 GB_Auto:AddToggle('AutoUber', { Text = 'Auto Uber', Default = false, Tooltip = 'Automatically uber when under health %'})
@@ -635,7 +633,7 @@ local WatermarkConnection = RunService.RenderStepped:Connect(function()
 		FrameCounter = 0;
 	end;
 	if WatermarkVisible then
-		Library:SetWatermark(('FishhCheat v2 | %s fps | %s ms'):format(
+		Library:SetWatermark(('SkibidiCheat v4 | %s fps | %s ms'):format(
 			math.floor(FPS),
 			math.floor(Ping)
 		));
@@ -1689,11 +1687,11 @@ end))
 local index -- Wallbang
 index = hookmetamethod(game, "__index", newcclosure(function(self, key)
     if not Library.Unloaded then
-		--[[if key == "Value" and self:IsA("ValueBase") and not checkcaller() then
+		if key == "Value" and self:IsA("ValueBase") and not checkcaller() then
 			if self.Name:lower():match("firerate") and Toggles.FirerateChanger.Value and not self.Parent:FindFirstChild("Projectile") then
 				return Options.FirerateAmount.Value
 			end
-		end]]
+		end
         if Toggles.Wallbang.Value and key == "Clips" then
             return workspace.Map
         end
